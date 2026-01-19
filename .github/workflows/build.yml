@@ -28,5 +28,6 @@ jobs:
         with:
           imageName: jpacheco87/devcontainer
           imageTag: latest
+          cacheFrom: jpacheco87/devcontainer:latest
           push: always
           runCmd: echo "Dev container built successfully"
