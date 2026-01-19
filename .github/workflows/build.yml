@@ -29,5 +29,6 @@ jobs:
           imageName: jpacheco87/devcontainer
           imageTag: latest
           cacheFrom: jpacheco87/devcontainer:latest
+          privileged: true
           push: always
           runCmd: echo "Dev container built successfully"
