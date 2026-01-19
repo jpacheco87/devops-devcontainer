@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# Script to set up .devcontainer/devcontainer.json in the current directory
+
+# Create .devcontainer directory if it doesn't exist
+mkdir -p .devcontainer
+
+# Create devcontainer.json with the configuration
+cat > .devcontainer/devcontainer.json << 'EOF'
+{
+  "name": "Envision Devops Environment",
+  "image": "jpacheco87/devcontainer:latest",
+  "postStartCommand": "post-start",
+  "remoteUser": "vscode",
+  // Configure tool-specific properties
+  "customizations": {
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created
+      "extensions": [
+        "hashicorp.terraform",
+        "ms-azuretools.vscode-azureterraform",
+        "run-at-scale.terraform-doc-snippets",
+        "redhat.vscode-yaml",
+        "redhat.ansible",
+        "eamodio.gitlens",
+        "donjayamanne.githistory",
+        "mhutchie.git-graph",
+        "dhoeric.ansible-vault",
+        "shardulm94.trailing-spaces",
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "streetsidesoftware.code-spell-checker",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "timonwong.shellcheck",
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      // Set *default* container specific settings.json values on container create
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/zsh`"
+          }
+        },
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        // Terraform settings
+        "[terraform]": {
+          "editor.defaultFormatter": "hashicorp.terraform",
+          "editor.formatOnSave": true,
+          "editor.tabSize": 2
+        },
+        "[terraform-vars]": {
+          "editor.defaultFormatter": "hashicorp.terraform",
+          "editor.formatOnSave": true,
+          "editor.tabSize": 2
+        },
+        "terraform.languageServer": {
+          "enabled": true,
+          "args": []
+        },
+        "terraform.experimentalFeatures.validateOnSave": true,
+        // YAML settings
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml",
+          "editor.formatOnSave": true,
+          "editor.tabSize": 2
+        },
+        // Markdown settings
+        "[markdown]": {
+          "editor.defaultFormatter": null,
+          "editor.formatOnSave": true
+        },
+        // Ansible settings
+        "[ansible]": {
+          "editor.defaultFormatter": "redhat.ansible",
+          "editor.formatOnSave": true,
+          "editor.tabSize": 2
+        }
+      }
+    }
+  },
+  // Mount host volumes for credentials and caching
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/vscode/.azure,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/home/vscode/.config/gcloud,type=bind,consistency=cached",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+    "source=terraform-cache,target=/home/vscode/.terraform.d/plugin-cache,type=volume"
+  ],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally
+  // "forwardPorts": [],
+  // Features to add to the dev container
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": false
+    },
+    "ghcr.io/devcontainers-extra/features/ansible:2": {},
+    "ghcr.io/hspaans/devcontainer-features/ansible-lint:2": {}
+  },
+  // Environment variables
+  "containerEnv": {
+    "TF_PLUGIN_CACHE_DIR": "/home/vscode/.terraform.d/plugin-cache"
+  }
+}
+EOF
+
+echo ".devcontainer/devcontainer.json has been created successfully."
