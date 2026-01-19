@@ -47,6 +47,10 @@ RUN PACKER_VERSION=1.14.3 && \
     mv /tmp/packer /usr/bin/ && \
     rm /tmp/packer.zip
 
+# Install Docker
+RUN apt-get update && apt-get install -y docker.io
+RUN usermod -aG docker vscode
+
 COPY scripts /home/vscode/.devcontainer/scripts
 COPY config /home/vscode/.devcontainer/config
 RUN chmod +x /home/vscode/.devcontainer/scripts/*.sh

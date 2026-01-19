@@ -17,7 +17,8 @@
       "CHECKOV_VERSION": "3.2.495"
     }
   },
-  "postStartCommand": "post-start",
+  "privileged": true,
+  "postStartCommand": ["sudo dockerd &", "post-start"],
   "remoteUser": "vscode",
   // Configure tool-specific properties
   "customizations": {
