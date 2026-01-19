@@ -65,10 +65,3 @@ echo ""
 if command -v devcontainer-info &> /dev/null; then
     devcontainer-info
 fi
-
-# Wait for user input before closing
-echo ""
-read -p "Press any key to continue..." -n 1 -s
-
-# Start interactive shell
-exec bash
