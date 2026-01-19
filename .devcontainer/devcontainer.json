@@ -17,8 +17,7 @@
       "CHECKOV_VERSION": "3.2.495"
     }
   },
-  "privileged": true,
-  "postStartCommand": ["sudo dockerd &", "post-start"],
+  "postStartCommand": "post-start",
   "remoteUser": "vscode",
   // Configure tool-specific properties
   "customizations": {
@@ -111,6 +110,12 @@
   // "forwardPorts": [],
   // Features to add to the dev container
   "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installOhMyZsh": true,
+      "configureZshAsDefaultShell": true
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/sshd:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest",
