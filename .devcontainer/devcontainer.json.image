@@ -1,6 +1,6 @@
 {
   "name": "Envision Devops Environment",
-  "image": "jpacheco87/envision-devops-environment:latest",
+  "image": "jpacheco87/devcontainer:latest",
   "postStartCommand": "post-start",
   "remoteUser": "vscode",
   // Configure tool-specific properties
@@ -35,7 +35,7 @@
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {
           "bash": {
-            "path": "/bin/bash"
+            "path": "/bin/zsh`"
           }
         },
         "editor.formatOnSave": true,
